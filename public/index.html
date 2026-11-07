@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wunschsite – Wunschlisten zum Teilen</title>
+  <meta name="description" content="Schreib deine Wünsche auf, teile die Liste per Link oder QR-Code und lass Freunde heimlich reservieren.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/retro.css">
+</head>
+<body>
+  <main class="desktop start-grid">
+    <section class="window tb-blue welcome" aria-labelledby="welcome-title">
+      <div class="title-bar">
+        <div class="title-bar-text"><img src="/favicon.svg" alt=""><span>Willkommen bei Wunschsite</span></div>
+        <div class="title-bar-controls" aria-hidden="true">
+          <span class="tb-btn">_</span><span class="tb-btn">□</span><span class="tb-btn close">×</span>
+        </div>
+      </div>
+      <div class="window-body">
+        <div class="hero">
+          <img class="hero-logo" src="/favicon.svg" alt="">
+          <div>
+            <h1 id="welcome-title">Wünsch dir was!</h1>
+            <p>
+              Erstelle deine individuelle Wunschliste und schicke sie an deine Wunscherfüller.
+            </p>
+          </div>
+        </div>
+
+        <div class="feature-icons">
+          <div class="feature">
+            <img src="/img/icon-liste.svg" alt="">
+            <strong>Wunschliste</strong>
+            <span>individuell erstellen</span>
+          </div>
+          <div class="feature">
+            <img src="/img/icon-qrcode.svg" alt="">
+            <strong>Liste</strong>
+            <span>per Link oder QR-Code teilen</span>
+          </div>
+          <div class="feature">
+            <img src="/img/icon-friends.svg" alt="">
+            <strong>Freunde</strong>
+            <span>brauchen kein Konto</span>
+          </div>
+        </div>
+
+      </div>
+      <div class="status-bar"><p>Bereit</p><p>Version 1.0</p></div>
+    </section>
+
+    <section class="window tb-red" id="anmelden" aria-labelledby="login-title">
+      <div class="title-bar">
+        <div class="title-bar-text"><img src="/img/icon-account.svg" alt=""><span id="login-title">Meine Listen</span></div>
+        <div class="title-bar-controls" aria-hidden="true"><span class="tb-btn close">×</span></div>
+      </div>
+      <div class="window-body">
+        <div id="logged-in" class="welcome-back" hidden>
+          <p>Hallo <strong id="hello-name"></strong>, schön dass du wieder da bist.</p>
+          <a class="btn btn-default btn-yellow" href="/meine-listen">Zu meinen Listen</a>
+        </div>
+
+        <div id="logged-out">
+          <div class="tabs" role="tablist">
+            <button type="button" role="tab" id="tab-login" aria-controls="panel-login" aria-selected="true">Anmelden</button>
+            <button type="button" role="tab" id="tab-register" aria-controls="panel-register" aria-selected="false" tabindex="-1">Neues Konto</button>
+          </div>
+
+          <div class="tab-panel" role="tabpanel" id="panel-login" aria-labelledby="tab-login">
+            <form id="login-form" novalidate>
+              <div class="field">
+                <label for="login-user">Benutzername</label>
+                <input type="text" id="login-user" name="username" autocomplete="username" autocapitalize="none" required>
+              </div>
+              <div class="field">
+                <label for="login-pass">Passwort</label>
+                <input type="password" id="login-pass" name="password" autocomplete="current-password" required>
+              </div>
+              <div class="button-row end">
+                <button type="submit" class="btn-default">OK</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="tab-panel" role="tabpanel" id="panel-register" aria-labelledby="tab-register" hidden>
+            <form id="register-form" novalidate>
+              <div class="field">
+                <label for="reg-user">Benutzername</label>
+                <input type="text" id="reg-user" name="username" autocomplete="username" autocapitalize="none" minlength="3" maxlength="30" required>
+                <span class="hint">3–30 Zeichen: a–z, 0–9, Punkt, Minus, Unterstrich</span>
+              </div>
+              <div class="field">
+                <label for="reg-name">So sollen dich andere sehen</label>
+                <input type="text" id="reg-name" name="displayName" maxlength="40" placeholder="z. B. Oma Gisela">
+              </div>
+              <div class="field">
+                <label for="reg-pass">Passwort</label>
+                <input type="password" id="reg-pass" name="password" autocomplete="new-password" minlength="8" required>
+                <span class="hint">mindestens 8 Zeichen</span>
+              </div>
+              <div class="button-row end">
+                <button type="submit" class="btn-default">Konto anlegen</button>
+              </div>
+            </form>
+          </div>
+          <p class="small muted flush gap-above">
+            Ein Konto brauchst nur du, wenn du eine Liste erstellst. Wer etwas reservieren will, braucht keins.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="window tb-gray notepad" aria-label="Anleitung">
+      <div class="title-bar">
+        <div class="title-bar-text"><img src="/img/icon-exclamation.svg" alt=""><span>So geht's.txt – Editor</span></div>
+        <div class="title-bar-controls" aria-hidden="true"><span class="tb-btn">_</span><span class="tb-btn close">×</span></div>
+      </div>
+      <div class="menu-bar" aria-hidden="true"><span>Datei</span><span>Bearbeiten</span><span>Format</span><span>?</span></div>
+      <div class="window-body sunken">
+<pre>SO GEHT'S
+=========
+
+1. Konto anlegen. Dauert keine Minute.
+2. Neue Liste machen, z. B. "Geburtstag".
+3. Link vom Produkt einfügen. Name, Preis
+   und Bild holen wir uns selbst aus dem
+   Shop. Du sagst nur noch, wie wichtig
+   dir der Wunsch ist.
+4. Auf "Teilen" klicken und den Link oder
+   den QR-Code verschicken.
+
+Deine Gäste brauchen KEIN Konto. Sie
+öffnen den Link, klicken auf "Reservieren"
+und tippen ihren Namen ein. Fertig.
+
+Und du? Du siehst nicht, was reserviert
+ist. Sonst wär's ja keine Überraschung.</pre>
+      </div>
+    </section>
+  </main>
+
+  <script src="/js/common.js"></script>
+  <script src="/js/start.js"></script>
+</body>
+</html>

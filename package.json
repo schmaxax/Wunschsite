@@ -1,0 +1,18 @@
+{
+  "name": "wunschsite",
+  "version": "1.0.0",
+  "description": "Wunschlisten erstellen, teilen und reservieren lassen.",
+  "private": true,
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node --experimental-sqlite --disable-warning=ExperimentalWarning server/index.js",
+    "dev": "node --experimental-sqlite --disable-warning=ExperimentalWarning --watch server/index.js"
+  },
+  "engines": {
+    "node": ">=22.5"
+  },
+  "dependencies": {
+    "express": "^5.3.0",
+    "qrcode": "^1.5.4"
+  }
+}

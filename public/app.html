@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Meine Listen – Wunschsite</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/retro.css">
+</head>
+<body>
+  <main class="desktop">
+    <section class="window tb-green" aria-labelledby="app-title">
+      <div class="title-bar">
+        <div class="title-bar-text"><img src="/img/icon-liste.svg" alt=""><span id="app-title">Meine Wunschlisten</span></div>
+        <div class="title-bar-controls" aria-hidden="true">
+          <span class="tb-btn">_</span><span class="tb-btn">□</span><span class="tb-btn close">×</span>
+        </div>
+      </div>
+      <div class="window-body explorer">
+        <nav class="tree sunken" aria-label="Listen">
+          <div class="tree-title">Listen von <span id="user-name"></span></div>
+          <ul id="list-tree"></ul>
+          <div class="tree-footer">
+            <button type="button" id="new-list-btn" class="btn-yellow full">Neue Liste…</button>
+          </div>
+        </nav>
+        <div class="pane" id="pane">
+          <div class="loading"><span class="hourglass" aria-hidden="true">⌛</span> Lade…</div>
+        </div>
+      </div>
+      <div class="status-bar"><p id="status">Bereit</p><p id="status-right"></p></div>
+    </section>
+  </main>
+
+  <dialog id="list-dialog" class="window tb-blue" aria-labelledby="list-dialog-title">
+    <div class="title-bar">
+      <div class="title-bar-text"><img src="/img/icon-liste.svg" alt=""><span id="list-dialog-title">Neue Liste</span></div>
+      <div class="title-bar-controls"><button type="button" class="tb-btn close" data-close aria-label="Schließen">×</button></div>
+    </div>
+    <form class="window-body" id="list-form" novalidate>
+      <div class="field">
+        <label for="list-title">Name der Liste</label>
+        <input type="text" id="list-title" name="title" maxlength="80" required placeholder="z. B. Mein 10. Geburtstag">
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="list-occasion">Anlass</label>
+          <input type="text" id="list-occasion" name="occasion" maxlength="40" list="occasions" placeholder="Geburtstag">
+          <datalist id="occasions">
+            <option value="Geburtstag"></option>
+            <option value="Weihnachten"></option>
+            <option value="Hochzeit"></option>
+            <option value="Einschulung"></option>
+            <option value="Ostern"></option>
+            <option value="Einfach so"></option>
+          </datalist>
+        </div>
+        <div class="field">
+          <label for="list-date">Datum</label>
+          <input type="date" id="list-date" name="eventDate">
+        </div>
+      </div>
+      <div class="field">
+        <label for="list-desc">Ein paar Worte für deine Gäste</label>
+        <textarea id="list-desc" name="description" maxlength="500" rows="3" placeholder="z. B. Ich trage Größe 140 und mag alles mit Dinos."></textarea>
+      </div>
+      <div class="button-row end">
+        <button type="submit" class="btn-default">Speichern</button>
+        <button type="button" data-close>Abbrechen</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="item-dialog" class="window tb-purple" aria-labelledby="item-dialog-title">
+    <div class="title-bar">
+      <div class="title-bar-text"><img src="/favicon.svg" alt=""><span id="item-dialog-title">Neuer Wunsch</span></div>
+      <div class="title-bar-controls"><button type="button" class="tb-btn close" data-close aria-label="Schließen">×</button></div>
+    </div>
+    <form class="window-body" id="item-form" novalidate>
+      <fieldset class="link-box">
+        <legend>Schritt 1: Link zum Produkt einfügen</legend>
+        <div class="share-box flush">
+          <input type="url" id="item-url" name="url" placeholder="https://www.shop.de/produkt…" aria-label="Link zum Produkt">
+          <button type="button" id="item-fetch">Daten holen</button>
+        </div>
+        <p class="fetch-status small" id="item-fetch-status" role="status">
+          Wir holen Name, Preis und Bild automatisch aus der Shopseite.
+        </p>
+      </fieldset>
+      <div class="field">
+        <label for="item-title">Was wünschst du dir?</label>
+        <input type="text" id="item-title" name="title" maxlength="100" required placeholder="z. B. Lego Feuerwehrauto">
+      </div>
+      <div class="field">
+        <label for="item-desc">Genauer gesagt…</label>
+        <textarea id="item-desc" name="description" maxlength="1000" rows="3" placeholder="Farbe, Größe, Modell – alles, was beim Kaufen hilft"></textarea>
+      </div>
+      <div class="with-preview">
+        <div class="field">
+          <label for="item-image">Bild-Adresse</label>
+          <input type="url" id="item-image" name="imageUrl" placeholder="https://…/bild.jpg">
+          <span class="hint">Wird meistens automatisch gefunden. Sonst: Rechtsklick aufs Produktbild → „Bildadresse kopieren“</span>
+        </div>
+        <div class="preview" id="item-preview" aria-hidden="true"></div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="item-price">Preis ungefähr (€)</label>
+          <input type="text" id="item-price" name="price" inputmode="decimal" placeholder="19,99">
+        </div>
+        <div class="field">
+          <label for="item-priority">Wie wichtig?</label>
+          <select id="item-priority" name="priority">
+            <option value="3">★★★ Herzenswunsch</option>
+            <option value="2" selected>★★☆ Würde mich freuen</option>
+            <option value="1">★☆☆ Wäre nett</option>
+          </select>
+        </div>
+      </div>
+      <div class="button-row end">
+        <button type="submit" class="btn-default">Speichern</button>
+        <button type="button" data-close>Abbrechen</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="share-dialog" class="window tb-orange" aria-labelledby="share-dialog-title">
+    <div class="title-bar">
+      <div class="title-bar-text"><img src="/img/icon-qr.svg" alt=""><span id="share-dialog-title">Liste teilen</span></div>
+      <div class="title-bar-controls"><button type="button" class="tb-btn close" data-close aria-label="Schließen">×</button></div>
+    </div>
+    <div class="window-body">
+      <p>Schick diesen Link an alle, die dir etwas schenken möchten. Ein Konto brauchen sie nicht.</p>
+      <div class="share-box">
+        <input type="text" id="share-url" readonly aria-label="Link zur Liste">
+        <button type="button" id="share-copy">Kopieren</button>
+      </div>
+      <div class="qr-frame sunken"><img id="share-qr" alt="QR-Code zur Liste"></div>
+      <p class="small muted">Tipp: Den QR-Code kannst du ausdrucken und in die Einladungskarte legen.</p>
+      <div class="button-row end">
+        <a class="btn" id="share-open" target="_blank" rel="noopener">Ansehen wie ein Gast</a>
+        <a class="btn" id="share-download" download="wunschliste-qr.svg">QR-Code speichern</a>
+        <button type="button" class="btn-default" data-close>Fertig</button>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="/js/common.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>

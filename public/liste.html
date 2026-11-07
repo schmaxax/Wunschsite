@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Wunschliste – Wunschsite</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/retro.css">
+</head>
+<body>
+  <main class="desktop">
+    <section class="window tb-purple" aria-labelledby="list-title">
+      <div class="title-bar">
+        <div class="title-bar-text"><img src="/favicon.svg" alt=""><span id="window-title">Wunschliste</span></div>
+        <div class="title-bar-controls" aria-hidden="true">
+          <span class="tb-btn">_</span><span class="tb-btn">□</span><span class="tb-btn close">×</span>
+        </div>
+      </div>
+      <div class="window-body" id="list-body">
+        <div class="loading"><span class="hourglass" aria-hidden="true">⌛</span> Lade Wunschliste…</div>
+      </div>
+      <div class="status-bar"><p id="status">Bereit</p><p id="status-right"></p></div>
+    </section>
+  </main>
+
+  <dialog id="reserve-dialog" class="window tb-green" aria-labelledby="reserve-title">
+    <div class="title-bar">
+      <div class="title-bar-text"><img src="/img/icon-haken.svg" alt=""><span id="reserve-title">Reservieren</span></div>
+      <div class="title-bar-controls"><button type="button" class="tb-btn close" data-close aria-label="Schließen">×</button></div>
+    </div>
+    <form class="window-body" id="reserve-form" novalidate>
+      <p>Du möchtest <strong id="reserve-item"></strong> schenken? Super!</p>
+      <div class="field">
+        <label for="reserve-name">Dein Name</label>
+        <input type="text" id="reserve-name" name="name" maxlength="40" required autocomplete="name">
+        <span class="hint">Andere Gäste sehen, wer was reserviert hat – praktisch, falls ihr zusammenlegen wollt. <span id="reserve-owner"></span> sieht es nicht.</span>
+      </div>
+      <div class="notice">
+        <img src="/img/icon-info.svg" alt="">
+        <p class="small">Du kannst die Reservierung später wieder aufheben – aber nur in diesem Browser auf diesem Gerät.</p>
+      </div>
+      <div class="button-row end">
+        <button type="submit" class="btn-default">Reservieren</button>
+        <button type="button" data-close>Abbrechen</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="/js/common.js"></script>
+  <script src="/js/liste.js"></script>
+</body>
+</html>
